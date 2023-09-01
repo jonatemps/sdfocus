@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\CanalVentesScreen;
+use App\Orchid\Screens\dcmEvaluationCreen;
+use App\Orchid\Screens\DealerPurchaseScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -9,6 +12,10 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\FirstCallQualiScreen;
+use App\Orchid\Screens\MonitoringScreen;
+use App\Orchid\Screens\PerfoDistributionScreen;
+use App\Orchid\Screens\PerfoInfraScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -97,3 +104,13 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');
+
+Route::screen('perfo/distribution', PerfoDistributionScreen::class)->name('platform.perfo.distribution');
+Route::screen('perfo/infra/{kpi?}/{mtd?}', PerfoInfraScreen::class)->name('platform.perfo.infra');
+Route::screen('Dealer-purchase', DealerPurchaseScreen::class)->name('platform.dealer.purchase');
+Route::screen('first-call-quality', FirstCallQualiScreen::class)->name('platform.first.call.quality');
+Route::screen('monitoring', MonitoringScreen::class)->name('platform.monitoring');
+Route::screen('Canal-de-ventes', CanalVentesScreen::class)->name('platform.canal.ventes');
+Route::screen('dcm-evaluation', dcmEvaluationCreen::class)->name('platform.dcm.evaluation');
+
+
