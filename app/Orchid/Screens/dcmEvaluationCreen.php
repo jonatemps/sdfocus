@@ -2,10 +2,12 @@
 
 namespace App\Orchid\Screens;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Illuminate\Support\Str;
 
 class dcmEvaluationCreen extends Screen
 {
@@ -26,7 +28,8 @@ class dcmEvaluationCreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Evaluation DCM';
+        // Auth::user()->name
+        return 'Evaluation DCM --'. Str::ucfirst(Auth::user()->name).' --';
     }
 
     public function description(): ?string
@@ -51,7 +54,11 @@ class dcmEvaluationCreen extends Screen
      */
     public function layout(): iterable
     {
-        $evaluation = DB::table('dcm_evaluations')->where('dcm_phhone',Auth::user()->phone)->first();
+        $evaluation = DB::table('dcm_evaluations')->where('dcm_phhone',Auth::user()->phone)->orderBy('date','asc')->first();
+        // dd($evaluation->date);
+        $updateDate = Carbon::createFromFormat('d/m/Y H:i',$evaluation->date)->translatedFormat('d F Y à H\hi');
+
+        // dd($evaluation,$updateDate->translatedFormat('d F Y à H\hi'));
         $taux = array(
             'ga' => ($evaluation->rea_ga/$evaluation->obj_ga)*100,
             'ga_om' => ($evaluation->rea_ga_om/$evaluation->obj_ga_om)*100,
@@ -65,6 +72,7 @@ class dcmEvaluationCreen extends Screen
             Layout::view('my.dcm-evaluation',[
                 'evaluation' => $evaluation,
                 'taux' => $taux,
+                'updateDate' => $updateDate,
             ])
         ];
     }

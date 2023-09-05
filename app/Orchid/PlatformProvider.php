@@ -48,7 +48,7 @@ class PlatformProvider extends OrchidServiceProvider
                     ->route('platform.dcm.evaluation'),
                     Menu::make('Revenu Infra')
                     ->icon('money')
-                    ->route('platform.perfo.distribution'),
+                    ->route('platform.dcm.evaluation.revenu'),
                 ])
                 ->divider(),
 

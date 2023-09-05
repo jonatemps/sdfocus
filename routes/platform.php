@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\CanalVentesScreen;
 use App\Orchid\Screens\dcmEvaluationCreen;
+use App\Orchid\Screens\dcmEvaluationRevenuCreen;
 use App\Orchid\Screens\DealerPurchaseScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -112,5 +113,7 @@ Route::screen('first-call-quality', FirstCallQualiScreen::class)->name('platform
 Route::screen('monitoring', MonitoringScreen::class)->name('platform.monitoring');
 Route::screen('Canal-de-ventes', CanalVentesScreen::class)->name('platform.canal.ventes');
 Route::screen('dcm-evaluation', dcmEvaluationCreen::class)->name('platform.dcm.evaluation');
+Route::screen('dcm-evaluation/revenu', dcmEvaluationRevenuCreen::class)->name('platform.dcm.evaluation.revenu');
+
 
 
