@@ -2,15 +2,14 @@
 
 namespace App\Orchid\Screens;
 
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Support\Str;
-use PhpParser\Node\Stmt\TryCatch;
 
-class dcmEvaluationCreen extends Screen
+class tlEvaluationCreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -30,7 +29,7 @@ class dcmEvaluationCreen extends Screen
     public function name(): ?string
     {
         // Auth::user()->name
-        return 'Evaluation '. (Auth::user()->fonction ?? '') .'--'. ucfirst(strtolower(Auth::user()->name)).' --';
+        return 'Evaluation '. (strtoupper(Auth::user()->fonction)?? '') .'--'.Str::ucfirst(Auth::user()->name).' --';
     }
 
     public function description(): ?string
@@ -55,12 +54,18 @@ class dcmEvaluationCreen extends Screen
      */
     public function layout(): iterable
     {
-        try {
-            // dd(DB::table('dcm_evaluations')->where('dcm_phhone',"852354266")->orderBy('date','asc')->first(),Auth::user()->phone);
-        $evaluation = DB::table('dcm_evaluations')->where('dcm_phhone',Auth::user()->phone)->orderBy('date','desc')->first();
-        // dd($evaluation );
-        $updateDate = Carbon::createFromFormat('d/m/Y H:i',$evaluation->date)->translatedFormat('d F Y à H\hi');
 
+        try {
+            // dd('ffff' ,DB::table('tl_evaluations')->where('tl_phone',Auth::user()->phone)->orderBy('date','desc')->first());
+            // dd(DB::table('dcm_evaluations')->where('dcm_phhone',"852354266")->orderBy('date','asc')->first(),Auth::user()->phone);
+            // dd(Auth::user()->phone);
+            $evaluation = DB::table('tl_evaluations')->where('tl_phone',Auth::user()->phone)->orderBy('date','desc')->first();
+            // dd($evaluation );
+            $updateDate = Carbon::createFromFormat('d/m/Y H:i',$evaluation->date)->translatedFormat('d F Y à H\hi');
+
+        // dd($evaluation->rea_cico/$evaluation->obj_cico);
+        // DD($this->getTax($evaluation->rea_cico,$evaluation->obj_cico));
+        // dd($evaluation,$updateDate->translatedFormat('d F Y à H\hi'));
 
         } catch (\Throwable $th) {
             return [
@@ -68,9 +73,6 @@ class dcmEvaluationCreen extends Screen
             ];
         }
 
-                // dd($evaluation->rea_cico/$evaluation->obj_cico);
-        // DD($this->getTax($evaluation->rea_cico,$evaluation->obj_cico));
-        // dd($evaluation,$updateDate->translatedFormat('d F Y à H\hi'));
         $taux = array(
             'ga' => $this->getTax($evaluation->rea_ga,$evaluation->obj_ga),
             'ga_om' => $this->getTax($evaluation->rea_ga_om,$evaluation->obj_ga_om),
@@ -78,6 +80,7 @@ class dcmEvaluationCreen extends Screen
             'etopup' => $this->getTax($evaluation->rea_etopup,$evaluation->obj_etopup),
             'cico' => $this->getTax($evaluation->rea_cico,$evaluation->obj_cico),
             'visite' => $this->getTax($evaluation->pdv_visited,$evaluation->pdv_loaded),
+
         );
 
         // dd($taux['ga']);

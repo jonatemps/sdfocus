@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -50,7 +51,13 @@ class PlatformProvider extends OrchidServiceProvider
                     ->icon('money')
                     ->route('platform.dcm.evaluation.revenu'),
                 ])
-                ->divider(),
+                ->divider()
+                ->canSee(Auth::user()->fonction == 'dcm'),
+            Menu::make('Evaluation')
+                ->title('TEAM LEADER')
+                ->icon('graph')
+                ->route('platform.tl.evaluation')
+                ->canSee(Auth::user()->fonction == 'tl'),
 
             // Menu::make('Monitoring')
             //     ->title('Base')

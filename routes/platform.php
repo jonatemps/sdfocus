@@ -20,6 +20,7 @@ use App\Orchid\Screens\PerfoInfraScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\tlEvaluationCreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -114,6 +115,7 @@ Route::screen('monitoring', MonitoringScreen::class)->name('platform.monitoring'
 Route::screen('Canal-de-ventes', CanalVentesScreen::class)->name('platform.canal.ventes');
 Route::screen('dcm-evaluation', dcmEvaluationCreen::class)->name('platform.dcm.evaluation');
 Route::screen('dcm-evaluation/revenu', dcmEvaluationRevenuCreen::class)->name('platform.dcm.evaluation.revenu');
+Route::screen('tl-evaluation', tlEvaluationCreen::class)->name('platform.tl.evaluation');
 
 
 

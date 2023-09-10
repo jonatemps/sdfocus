@@ -13,10 +13,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/home', function () {
+    return redirect()->route('platform.login');
+});
+
 Route::get('/', function () {
     return redirect()->route('platform.login');
 });
 
 Route::get('/welc', function () {
     return view('welcome');
+});
+
+Route::get('/maint', function () {
+    return view('my.maint');
 });

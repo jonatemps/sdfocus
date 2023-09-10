@@ -7,6 +7,7 @@ namespace App\Orchid\Screens\User;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\User;
@@ -77,7 +78,7 @@ class UserProfileScreen extends Screen
                         ->type(Color::DEFAULT())
                         ->icon('check')
                         ->method('save')
-                ),
+                )->canSee(empty(Auth::user()->fonction)),
 
             Layout::block(ProfilePasswordLayout::class)
                 ->title(__('Update Password'))
